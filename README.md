@@ -7,7 +7,8 @@ tippitytappity is a program to practice typing
 
 ```mermaid
 classDiagram
-  User <|-- Phrases 
+  
+  User <|-- TypingTest
   class User {
       + User ID
         - name: string
@@ -16,25 +17,26 @@ classDiagram
         + login(user: string, pass: string) boolean
         + get_email() string
         + TypingTest test
+        + sessions vector~TypingTest~
   }
-  Phrases <|-- TypingTest
+  
   class Phrases{
         - phrases vector~string~
         + add_phrase(title: string)
         + get_phrases() vector~string~
   }
-
-TypingTest <|-- Accuracy
+TypingTest <|--Phrases
+TypingTest
   class TypingTest{
       startTime(start:float)
       endTime(end:float)
-      Accuracy
-  }
-
-  class Accuracy {
-      - calculate_acc(wpm: float)
+      Phrases phrases
+      - calculateAccuracy(wpm: float)
       + get_acc() float
-      + correctKeystroke(cks: int)
+      + calculateCorrectKeystrokes(cks: int)
       + getcorrectKeystroke()
   }
+  
+
+ 
 ```
